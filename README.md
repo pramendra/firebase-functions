@@ -71,6 +71,26 @@ $ npm run dev
 $ npm run emulators
 ```
 
+## Pre-Deployment
+
+### Enable Google Sheets API
+
+> issuse: Enable Google Sheets API has not been used in project [PROJECT-ID] before or it is disabled
+
+> Go to the URL provided in the error message: [Google Sheets API Overview](https://console.developers.google.com/apis/api/sheets.googleapis.com/overview?project=[PROJECT-ID])
+
+### add client_email from service account to google sheet as editor
+
+### Issue: Failed to configure trigger for event-type:providers/firebase.auth/eventTypes/user.create
+
+> Enable email provider at
+
+> https://console.firebase.google.com/project//[PROJECT-ID]/authentication/providers
+
+### Set Project Environment to production
+
+https://console.firebase.google.com/project/[PROJECT-ID]/settings/general
+
 ## Deployment
 
 ## Prepare environment
@@ -95,10 +115,6 @@ $ firebase deploy --only functions --debug
 
 ## Fixes
 
-### Google Sheets API has not been used in project [PROJECT-ID] before or it is disabled
-
-Go to the URL provided in the error message: [Google Sheets API Overview](https://console.developers.google.com/apis/api/sheets.googleapis.com/overview?project=[PROJECT-ID])
-
 ## vscode setup
 
 1. Launch VSCode.
@@ -117,20 +133,6 @@ $ curl -X POST \
      -d '{"email": "testuser@example.com", "password": "testPassword"}' \
      http://127.0.0.1:5001/[project_id]/us-central1/addTestUser
 ```
-
-## Note
-
-### Set Env Environment to production
-
-https://console.firebase.google.com/project/[PROJECT-ID]/settings/general
-
-### add client_email from service account to google sheet as editor
-
-### Issue: Failed to configure trigger for event-type:providers/firebase.auth/eventTypes/user.create
-
-Enable email provider at
-
-> https://console.firebase.google.com/project//[PROJECT-ID]/authentication/providers
 
 ### chagne file permission
 
