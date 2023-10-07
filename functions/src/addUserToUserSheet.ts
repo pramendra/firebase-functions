@@ -5,9 +5,8 @@ import { getJwtClient } from './utils/jwtClient';
 export const addUserToUserSheet = functions.auth
   .user()
   .onCreate(async (user) => {
-    const config = functions.config();
-
-    const SPREADSHEET_ID = config.sheets.spreadsheetid;
+    const config = functions.config().env;
+    const SPREADSHEET_ID = config.sheets.spreadsheet_id;
     const SHEET_NAME = 'users';
     const sheets = google.sheets('v4');
     const jwtClient = getJwtClient();

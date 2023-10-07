@@ -1,0 +1,6 @@
+{
+  "sheets": {
+    "spreadsheet_id": "replace-here-id"
+  },
+  "service_account": "./service-account-dev.json"
+}

@@ -1,7 +1,6 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 
-// to add test user see `add test user`
 export const addTestUser = functions.https.onRequest(async (req, res) => {
   if (req.method !== 'POST') {
     res.status(405).send('Method Not Allowed');

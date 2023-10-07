@@ -28,7 +28,7 @@ $ npm --prefix ./functions install
 #### Prepare service account
 
 ```bash
-cp functions/example-service-account.json functions/service-account.json
+cp functions/example-service-account.json functions/service-account-dev.json
 ```
 
 > download service file from https://console.firebase.google.com/project/[PROJECT-ID]/settings/serviceaccounts/adminsdk
@@ -36,7 +36,9 @@ cp functions/example-service-account.json functions/service-account.json
 #### Prepare runtime configuration
 
 ```bash
-cd ./functions
+$ cp functions/example-env.json functions/env.dev.json
+$ firebase functions:config:set env="$(cat functions/env.dev.json)"
+$ cd functions
 $ firebase functions:config:get > .runtimeconfig.json
 ```
 
@@ -46,22 +48,20 @@ $ firebase functions:config:get > .runtimeconfig.json
 cp functions/example-.runtimeconfig.json functions/.runtimeconfig.json
 ```
 
-### prepare 
-code ./.firebaserc
-```
-{
-  "projects": {
-    "default": "[PROJECT-ID]"
-  }
-}
+### prepare firebase project
 
+```bash
+$ firebase use --add
 ```
+
+> select project(s)
 
 ## Run functions locally
 
 #### run firebase function on watch mode
 
 ```bash
+$ firebase use dev
 $ npm run dev
 ```
 
@@ -75,18 +75,29 @@ $ npm run emulators
 
 ## Prepare environment
 
+#### production deployment
+
 ```bash
-$ firebase functions:config:set sheets.spreadsheetid=key
 $ firebase use production
-$ firebase deploy --only functions:helloWorld --debug
+$ firebase functions:config:set env="$(cat ./functions/env.production.json)"
+$ firebase deploy --only functions --debug
+
+```
+
+#### dev deployment
+
+```bash
+$ firebase use dev
+$ firebase functions:config:set env="$(cat ./functions/env.dev.json)"
+$ firebase deploy --only functions --debug
 
 ```
 
 ## Fixes
 
-### Google Sheets API has not been used in project 131414788416 before or it is disabled
+### Google Sheets API has not been used in project [PROJECT-ID] before or it is disabled
 
-Go to the URL provided in the error message: [Google Sheets API Overview](https://console.developers.google.com/apis/api/sheets.googleapis.com/overview?project=131414788416)
+Go to the URL provided in the error message: [Google Sheets API Overview](https://console.developers.google.com/apis/api/sheets.googleapis.com/overview?project=[PROJECT-ID])
 
 ## vscode setup
 
@@ -106,3 +117,17 @@ $ curl -X POST \
      -d '{"email": "testuser@example.com", "password": "testPassword"}' \
      http://127.0.0.1:5001/[project_id]/us-central1/addTestUser
 ```
+
+## Note
+
+### Set Env Environment to production
+
+https://console.firebase.google.com/project/[PROJECT-ID]/settings/general
+
+### add client_email from service account to google sheet as editor
+
+### Issue: Failed to configure trigger for event-type:providers/firebase.auth/eventTypes/user.create
+
+Enable email provider at
+
+> https://console.firebase.google.com/project//[PROJECT-ID]/authentication/providers

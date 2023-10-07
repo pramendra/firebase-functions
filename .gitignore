@@ -11,3 +11,4 @@ service-account*.json
 *-debug.log
 .runtimeconfig.json
 .firebaserc
+env*.json

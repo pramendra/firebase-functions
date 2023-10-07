@@ -1,10 +1,12 @@
 import { google } from 'googleapis';
+import { getServiceAccount } from './serviceAccount';
 
-const SERVICE_ACCOUNT = require('../../service-account.json');
-
-export const getJwtClient = () =>
-  new google.auth.JWT({
-    email: SERVICE_ACCOUNT.client_email,
-    key: SERVICE_ACCOUNT.private_key,
+export const getJwtClient = () => {
+  // eslint-disable-next-line import/no-dynamic-require
+  const serviceAccount = getServiceAccount();
+  return new google.auth.JWT({
+    email: serviceAccount.client_email,
+    key: serviceAccount.private_key,
     scopes: ['https://www.googleapis.com/auth/spreadsheets'],
   });
+};
