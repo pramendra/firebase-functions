@@ -28,18 +28,36 @@ $ npm --prefix ./functions install
 #### Prepare service account
 
 ```bash
-mv functions/example-service-account.json functions/service-account.json
+cp functions/example-service-account.json functions/service-account.json
 ```
 
-> download service file from https://console.firebase.google.com/project/[PRODUCT-ID]/settings/serviceaccounts/adminsdk
+> download service file from https://console.firebase.google.com/project/[PROJECT-ID]/settings/serviceaccounts/adminsdk
 
 #### Prepare runtime configuration
 
 ```bash
+cd ./functions
 $ firebase functions:config:get > .runtimeconfig.json
 ```
 
-### Run app locally
+##### alternatively
+
+```bash
+cp functions/example-.runtimeconfig.json functions/.runtimeconfig.json
+```
+
+### prepare 
+code ./.firebaserc
+```
+{
+  "projects": {
+    "default": "[PROJECT-ID]"
+  }
+}
+
+```
+
+## Run functions locally
 
 #### run firebase function on watch mode
 

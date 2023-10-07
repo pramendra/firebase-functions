@@ -1,6 +1,7 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import { addTestUser } from './addTestUser';
+import { addUserToUserSheet } from './addUserToUserSheet';
 
 export const helloWorld = functions.https.onRequest((request, response) => {
   const config = functions.config();
@@ -18,4 +19,5 @@ admin.initializeApp();
 export {
   //
   addTestUser,
+  addUserToUserSheet,
 };
