@@ -131,3 +131,9 @@ https://console.firebase.google.com/project/[PROJECT-ID]/settings/general
 Enable email provider at
 
 > https://console.firebase.google.com/project//[PROJECT-ID]/authentication/providers
+
+### chagne file permission
+
+```
+$ chmod +x functions/predeploy.sh
+```

@@ -1,9 +1,11 @@
 import * as functions from 'firebase-functions';
 import { google } from 'googleapis';
 import { getJwtClient } from './utils/jwtClient';
+import { region } from './utils/config';
 
-export const addUserToUserSheet = functions.auth
-  .user()
+export const addUserToUserSheet = functions
+  .region(region)
+  .auth.user()
   .onCreate(async (user) => {
     const config = functions.config().env;
     const SPREADSHEET_ID = config.sheets.spreadsheet_id;
@@ -37,7 +39,8 @@ export const addUserToUserSheet = functions.auth
     };
 
     try {
-      await sheets.spreadsheets.values.append(request);
+      const response = await sheets.spreadsheets.values.append(request);
+      console.warn('>>', response);
     } catch (err) {
       console.error(err);
     }
